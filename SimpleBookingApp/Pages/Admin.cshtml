@@ -1,0 +1,19 @@
+﻿@page
+@model SimpleBookingApp.Pages.Admin.LoginModel
+
+<h2>Admin Login</h2>
+
+<form method="post">
+    <label>Username</label>
+    <input asp-for="Username" required />
+
+    <label>Password</label>
+    <input asp-for="Password" type="password" required />
+
+    <button type="submit">Login</button>
+</form>
+
+@if (Model.ErrorMessage != null)
+{
+    <p style="color:red;">@Model.ErrorMessage</p>
+}

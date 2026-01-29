@@ -1,24 +1,33 @@
 ﻿@page
 @model SimpleBookingApp.Pages.BookingModel
+@{
+    ViewData["Title"] = "Book Appointment";
+}
 
-<h2>Book Appointment</h2>
+<h2>Book Home Affairs Appointment</h2>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <p style="color:red;">@Model.ErrorMessage</p>
+}
 
 <form method="post">
-    <label>Name</label>
-    <input asp-for="Appointment.Name" required />
+    <label>Full Name</label><br />
+    <input asp-for="Appointment.Name" required /><br /><br />
 
-    <label>Email</label>
-    <input asp-for="Appointment.Email" type="email" required />
+    <label>Email Address</label><br />
+    <input asp-for="Appointment.Email" type="email" required /><br /><br />
 
-    <label>Appointment Type</label>
-    <select asp-for="Appointment.Type">
-        <option>Consultation</option>
-        <option>Meeting</option>
-        <option>Support</option>
-    </select>
+    <label>Appointment Type</label><br />
+    <select asp-for="Appointment.Type" required>
+        <option value="">-- Select Service --</option>
+        <option value="ID Application">ID Application</option>
+        <option value="Passport">Passport</option>
+        <option value="Birth Certificate">Birth Certificate</option>
+    </select><br /><br />
 
-    <label>Date</label>
-    <input asp-for="Appointment.Date" type="date" required />
+    <label>Appointment Date</label><br />
+    <input asp-for="Appointment.Date" type="date" required /><br /><br />
 
-    <button type="submit">Submit</button>
+    <button type="submit">Book Appointment</button>
 </form>

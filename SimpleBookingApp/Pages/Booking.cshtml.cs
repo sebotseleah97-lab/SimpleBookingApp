@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SimpleBookingApp.Data;
 using SimpleBookingApp.Models;
-using System;
+using System.Linq;
 
 namespace SimpleBookingApp.Pages
 {
@@ -18,10 +18,19 @@ namespace SimpleBookingApp.Pages
         [BindProperty]
         public Appointment Appointment { get; set; }
 
+        public string ErrorMessage { get; set; }
+
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
+            // Prevent double booking
+            bool exists = _context.Appointments.Any(a =>
+                a.Type == Appointment.Type &&
+                a.Date == Appointment.Date
+            );
+
+            if (exists)
             {
+                ErrorMessage = "This appointment is already booked for the selected date.";
                 return Page();
             }
 

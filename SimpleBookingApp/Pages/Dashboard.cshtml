@@ -1,0 +1,50 @@
+﻿@page
+@model SimpleBookingApp.Pages.Admin.DashboardModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h2>Admin Dashboard</h2>
+<p>Manage all appointments</p>
+
+<!-- Logout button -->
+<form method="post" asp-page="/Admin/Logout" style="margin-bottom:15px;">
+    <button type="submit">Logout</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var a in Model.Appointments)
+        {
+            <tr>
+                <td>@a.Name</td>
+                <td>@a.Email</td>
+                <td>@a.Type</td>
+                <td>@a.Date.ToShortDateString()</td>
+                <td>
+                    <!-- Edit button -->
+                    <a class="btn" href="/Admin/Edit/@a.Id">Edit</a>
+
+                    <!-- Delete button -->
+                    <form method="post" asp-page-handler="Delete" style="display:inline;">
+                        <input type="hidden" name="id" value="@a.Id" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+
+<a class="btn" href="/">Back Home</a>

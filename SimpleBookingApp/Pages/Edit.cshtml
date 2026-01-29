@@ -1,0 +1,28 @@
+﻿@page "{id:int}"
+@model SimpleBookingApp.Pages.Admin.EditModel
+
+<h2>Edit Appointment</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Appointment.Id" />
+
+    <label>Name</label>
+    <input asp-for="Appointment.Name" required />
+
+    <label>Email</label>
+    <input asp-for="Appointment.Email" type="email" required />
+
+    <label>Appointment Type</label>
+    <select asp-for="Appointment.Type">
+        <option>Consultation</option>
+        <option>Meeting</option>
+        <option>Support</option>
+    </select>
+
+    <label>Date</label>
+    <input asp-for="Appointment.Date" type="date" required />
+
+    <button type="submit">Update</button>
+</form>
+
+<a class="btn" href="/Admin/Dashboard">Back to Dashboard</a>
