@@ -1,24 +1,24 @@
 ﻿@page
-@model BookingModel
+@model SimpleBookingApp.Pages.BookingModel
 
 <h2>Book Appointment</h2>
 
 <form method="post">
     <label>Name</label>
-    <input asp-for="Name" required />
+    <input asp-for="Appointment.Name" required />
 
     <label>Email</label>
-    <input asp-for="Email" type="email" required />
+    <input asp-for="Appointment.Email" type="email" required />
 
     <label>Appointment Type</label>
-    <select asp-for="Type">
+    <select asp-for="Appointment.Type">
         <option>Consultation</option>
         <option>Meeting</option>
         <option>Support</option>
     </select>
 
     <label>Date</label>
-    <input asp-for="Date" type="date" required />
+    <input asp-for="Appointment.Date" type="date" required />
 
     <button type="submit">Submit</button>
 </form>

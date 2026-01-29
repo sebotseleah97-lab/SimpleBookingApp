@@ -1,23 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SimpleBookingApp.Data;
+using SimpleBookingApp.Models;
 using System;
 
-public class BookingModel : PageModel
+namespace SimpleBookingApp.Pages
 {
-    [BindProperty]
-    public string Name { get; set; }
-
-    [BindProperty]
-    public string Email { get; set; }
-
-    [BindProperty]
-    public string Type { get; set; }
-
-    [BindProperty]
-    public DateTime Date { get; set; }
-
-    public IActionResult OnPost()
+    public class BookingModel : PageModel
     {
-        return RedirectToPage("Confirmation");
+        private readonly ApplicationDbContext _context;
+
+        public BookingModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        [BindProperty]
+        public Appointment Appointment { get; set; }
+
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            _context.Appointments.Add(Appointment);
+            _context.SaveChanges();
+
+            return RedirectToPage("Confirmation");
+        }
     }
 }
